@@ -76,7 +76,10 @@ int main(void) {
     printf(              "\n   camelforth-rp2040-b-MS-U r0.1.8-pre-alpha\n\n");
 
     uart_puts(UART_ID, "        +fl_sizing +alltargets +itsybitsy +blinkwait +feather\r\n");
-    printf(            "        +fl_sizing +alltargets +itsybitsy +blinkwait +feather\n");
+    printf(            "        +fl_sizing +alltargets +itsybitsy +blinkwait +feather\n\n\n");
+
+
+    printf(            "        THE MIGHTY QUINN Sat       9 Nov 23:35:13 UTC 2024\n\n\n");
 
     uart_puts(UART_ID, "        +no_emit +auto_load +rewind +flaccept +erase +flwrite\r\n");
     printf(            "        +no_emit +auto_load +rewind +flaccept +erase +flwrite\n");
