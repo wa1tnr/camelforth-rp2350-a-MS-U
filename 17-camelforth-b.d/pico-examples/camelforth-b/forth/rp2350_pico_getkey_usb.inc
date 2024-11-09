@@ -28,7 +28,18 @@ uint8_t getKey(void) {     // hardware-independent wrapper
             if (flop ==  0) flip = -1;
         }
         ch_read = getchar_timeout_us(18); // 4 tries per 87 uSec char window at 115200 bps
-    } while ((ch_read == '\0') || (ch_read == 0xff));
+
+    }
+#if 0
+/* old code 9 Nov 24 */
+      while ((ch_read == '\0') || (ch_read == 0xff));
+#endif
+
+
+      while ((ch_read == '\0') ||
+             (ch_read == 0xff) ||
+             (ch_read == 0xfe)
+    );
     return ch_read;
 }
 
