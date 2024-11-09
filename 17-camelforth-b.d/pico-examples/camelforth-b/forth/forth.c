@@ -104,8 +104,12 @@ unsigned char ROMDICT[1024];
 #include "atsamdx1.inc"
 #endif
 
+// TODO change this symbol for 2350 or make parallel symbol
 #ifdef RP2040_PICO
+/*
 #include "rp2040_pico.inc"
+*/
+#include "rp2350_pico2.inc"
 #endif
 
 /* 
