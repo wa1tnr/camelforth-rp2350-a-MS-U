@@ -1,5 +1,7 @@
 // #include "pico/stdlib.h"
 // Sat  9 Nov 21:59:48 UTC 2024
+/* GPIO25 is RP2350 cathode always grounded through zero ohms */
+
 #warning included pico2350.h Sat 9 Nov 2024
 
 #ifdef _BOARDS_PICO2_H
