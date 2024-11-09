@@ -1,5 +1,6 @@
 #ifndef _PICO_HARDWARE_INCLUDES_LOCAL_CF
 #define _PICO_HARDWARE_INCLUDES_LOCAL_CF
+#warning grafted back: pico-hardware-camelforth.h  Sat  9 Nov 19:27:45 UTC 2024
 // establish an ident string to print to console
 // establish flash limits
 
@@ -35,6 +36,7 @@
 // #warning was called in forth.c
 #endif
 
+#include "pico2350.h"
 #include "pico2040.h"
 #include "itsy.h"
 #include "feather.h"
@@ -53,7 +55,9 @@
 #ifndef LED_PIN_MASTER
     #warning -7777 // pico-LED.h  found no researched definition for the onboard LED pin
     #warning -7778 // pico-LED.h  LED_PIN_MASTER assigned to GPIO13, on a guess!
-    #define LED_PIN_MASTER 13 // assumes 'standard' D13 assignment per Arduino IDE sensibilities
+    // #define LED_PIN_MASTER 13 // assumes 'standard' D13 assignment per Arduino IDE sensibilities
+    // kludge 9 Nov 2024
+    #define LED_PIN_MASTER 25
     #define PIP_LENGTH 74777 // generic
     #define KB_PIP_LN  2444
     #define BLINK_MS_CF 60
