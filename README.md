@@ -1,5 +1,8 @@
 # camelforth-rp2040-b-MS-U   UNSTABLE   0.1.7-pre-alpha   Wed Apr 14 14:43:13 UTC 2021
 
+#### Sat  9 Nov 21:37:16 UTC 2024
+#### templated for rp2030 - non-working version 9 Nov 21:37z
+
 CamelForth in C, by Dr. Brad Rodriguez
 
 UNSTABLE version - with mass storage support QSPI flashROM
