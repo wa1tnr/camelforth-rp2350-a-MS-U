@@ -33,7 +33,7 @@ file (virtual typing into the forth interpreter).
 
 Press ESC to terminate .. or flood the input buffer (TIB) with
 space bar presses, to trip the counter of the maximum number of
-bytes to accept (`flaccept` word, in the threaded definitions).
+bytes to accept.
 
 `buf2flash` should be used next (immediately).  The program
 assumes this was done with no intervening use of the forth
