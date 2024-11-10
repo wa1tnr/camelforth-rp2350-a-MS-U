@@ -40,9 +40,15 @@ assumes this was done with no intervening use of the forth
 interpreter for side-queries.
 
 Next cold boot, the newly uploaded forth source (now resident
-in QSPI flashROM at 0x10040000) is read in (`'flaccept` during
+in QSPI flashROM at 0x10040000) is read in (`'flaccept'` during
 the boot) and thereby, the forth dictionary (held in SRAM)
  is expanded to include the new forth words.
+
+In other words, the `'accept'` word (for normal interactive use of
+the forth interpreter) was used as a model for reading forth source
+code from the QSPI flashROM address space.  This became the (threaded)
+`'flaccept'` word.
+
 
 Backspace behaves correctly now - it backspaces, prints a space
 character (to obliterate the existing character in the text
