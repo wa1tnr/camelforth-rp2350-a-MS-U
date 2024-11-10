@@ -72,20 +72,19 @@ int main(void) {
     for (int i=3;i>0;i--) _pico_LED();
     // stale message text follows - poorly maintained.
     // poor testing of latest edits - may cause issues.  However, brief test seemed okay.
-    uart_puts(UART_ID, "\r\n   camelforth-rp2040-b-MS-U r0.1.8-pre-alpha\r\n\r\n");
-    printf(              "\n   camelforth-rp2040-b-MS-U r0.1.8-pre-alpha\n\n");
+    uart_puts(UART_ID, "\r\n   camelforth-rp2350-a-MS-U r0.2.0-pre-alpha\r\n\r\n");
+    printf(              "\n   camelforth-rp2350-a-MS-U r0.2.0-pre-alpha\n\n");
 
     uart_puts(UART_ID, "        +fl_sizing +alltargets +itsybitsy +blinkwait +feather\r\n");
     printf(            "        +fl_sizing +alltargets +itsybitsy +blinkwait +feather\n\n\n");
 
-
-    printf(            "        THE MIGHTY QUINN Sat       9 Nov 23:35:13 UTC 2024\n\n\n");
+    printf(            "        Darmok and Gilad at Tenagra  Sun 10 Nov 19:37:53 UTC 2024\n\n\n");
 
     uart_puts(UART_ID, "        +no_emit +auto_load +rewind +flaccept +erase +flwrite\r\n");
     printf(            "        +no_emit +auto_load +rewind +flaccept +erase +flwrite\n");
 
-    uart_puts(UART_ID, "        +reflash +dump +blink +UART +USB\r\n");
-    printf(            "        +reflash +dump +blink +UART +USB\n");
+    uart_puts(UART_ID, "        +rp2350 +reflash +dump +blink +UART +USB\r\n");
+    printf(            "        +rp2350 +reflash +dump +blink +UART +USB\n");
 
     crufty_printer(); // examine ram with this nonsense function
 
