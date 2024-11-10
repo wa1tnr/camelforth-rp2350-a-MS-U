@@ -1,9 +1,67 @@
-# camelforth-rp2040-b-MS-U   UNSTABLE   0.1.7-pre-alpha   Wed Apr 14 14:43:13 UTC 2021
+# CamelForth in C
+## by Dr. Brad Rodriguez
 
-#### Sat  9 Nov 21:37:16 UTC 2024
-#### templated for rp2030 - non-working version 9 Nov 21:37z
+#### camelforth-rp2350-a-MS-U   UNSTABLE   0.2.0-pre-alpha   Sun Nov 10 20:09:35 UTC 2024
 
-CamelForth in C, by Dr. Brad Rodriguez
+#### commit 04380a6a5de988ccbba09b00001c2ef085ad9265
+#### Date:   Sun Nov 10 20:09:35 UTC 2024
+
+#### for rp2350 - working version 10 Nov 20:09z
+
+## CamelForth in C, by Dr. Brad Rodriguez
+
+# RP2350 version
+
+This version of CamelForth in C continues what was done for
+the Raspberry Pi Pico RP2040 board (as well as one or two
+other variants of board based on the RP2040 chip).
+
+Now for RP2350.
+
+A few minor USB CDC/ACM (tty) input/output issues resolved
+for a smooth end-user experience.
+
+Stores forth code in resident QSPI flashROM at 0x10040000.
+
+` ok    hex 10040000 10 dump`
+
+to see it, when resident.
+
+The ` reading ` word expects keyboard input and was designed for
+ascii-xfr (from minicom) upload of a plaintext forth source code
+file (virtual typing into the forth interpreter).
+
+Press ESC to terminate .. or flood the input buffer (TIB) with
+space bar presses, to trip the counter of the maximum number of
+bytes to accept (`flaccept` word, in the threaded definitions).
+
+`buf2flash` should be used next (immediately).  The program
+assumes this was done with no intervening use of the forth
+interpreter for side-queries.
+
+Next cold boot, the newly uploaded forth source (now resident
+in QSPI flashROM at 0x10040000) is read in (`'flaccept` during
+the boot) and thereby, the forth dictionary (held in SRAM)
+ is expanded to include the new forth words.
+
+Backspace behaves correctly now - it backspaces, prints a space
+character (to obliterate the existing character in the text
+terminal interface) and then backspaces a second time (to
+reposition the cursor).
+
+The context makes sense; `5522` followed by two backspace keypresses,
+followed by `11` produces `5511`.  Like that.
+
+No provision tested for what to do if backspace is pressed such
+that the left margin is 'exceeded' (flush left to expected location,
+and one or more additional keypresses of the backspace key beyond it).
+
+If it was handled prior (earlier iterations of this port/program)
+it is not presently recollected. ;)
+
+Yes this got too long.  tldr ftw.
+
+#### Earlier text read:
 
 UNSTABLE version - with mass storage support QSPI flashROM
 
