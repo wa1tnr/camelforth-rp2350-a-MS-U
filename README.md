@@ -67,7 +67,39 @@ and one or more additional keypresses of the backspace key beyond it).
 If it was handled prior (earlier iterations of this port/program)
 it is not presently recollected. ;)
 
-Yes this got too long.  tldr ftw.
+### big bug was
+The big bug was:
+
+`ch_read = getchar_timeout_us(18);`
+
+.. producing a new (and unexpected) output of `0xfe` stored (possibly)
+in `ch_read`.  This new behavior required a response; a suppression
+strategy (or similar) was chosen.
+
+Until this bug was found and fixed, the interpreter would not process
+input (even though it was echo'd to the console fairly accurately).
+
+#### the big bug fix (Nov 2024)
+
+Literally: another `'OR'` clause was added to existing filtering
+(of `0x00` and of `0xFF`).  Now it also filters `0xFE`.  It is
+deemed likely that further testing would show that `0xFF` no longer
+needs a filter there.  Nothing was examined to find where in the
+pico-sdk this is determined. ;)
+
+##### Future: filter all in one place
+
+At the moment there are two likely places (in two different source files, likely).
+
+Where `ch_read = getchar_timeout_us(18);` was employed.
+
+Considering a common wrapper for any use case as the intent seems
+at least superficially identical (to gain valid keyboard input).
+
+
+
+## Yes this got too long.  tldr ftw.
+
 
 #### Earlier text read:
 
