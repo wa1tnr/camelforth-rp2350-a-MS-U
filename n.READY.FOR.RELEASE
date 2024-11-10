@@ -1,7 +1,7 @@
-0.1.9-pre-alpha READY.FOR.RELEASE
+0.2.0-pre-alpha READY.FOR.RELEASE
 
-last commit c6cc55e06e532433e1bcd74ba65d4d0ae6003ce2
+last commit 0374183b1bbe616d85f861b8e37c2e4659229b9b
 
-Date:   Fri Mar 31 00:14:52 UTC 2023
+Date:   Sun Nov 10 20:01:41 UTC 2024
 
-    blind commit
+    Well-tested iteration of CamelForth in C RP2350
