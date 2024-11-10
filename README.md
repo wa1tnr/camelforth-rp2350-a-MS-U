@@ -8,6 +8,8 @@
 
 #### for rp2350 - working version 10 Nov 20:09z
 
+##### Please note: release tags prior to 0.2.0-pre-alpha are an artifact of the earlier work, and were ignored when making the 0.2.0-pre-alpha release.  See the (entirely intact) commit history, from February of 2021, forward, when the cloned repository began as an effort for the RP2040 (which was new at the time).
+
 ## CamelForth in C, by Dr. Brad Rodriguez
 
 # RP2350 version
