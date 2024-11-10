@@ -1021,18 +1021,19 @@ THREAD(spaces) = { Fenter, Tdup, Tqbranch, OFFSET(5), Tspace, Toneminus,
 #endif
 
 THREAD(accept) = { Fenter, Tover, Tplus, Toneminus, Tover,
-/* 1 */  Tkey, Tdup, Tlit, LIT(NEWLINE), Tnotequal, Tqbranch, OFFSET(27 /*5*/),
-         Tdup, Tlit, LIT(BACKSPACE), Tequal, Tqbranch, OFFSET(12 /*3*/),
-         Tdrop, Tlit, LIT(BACKUP), Temit, Toneminus, Ttor, Tover, Trfrom, 
-         Tumax, Tbranch, OFFSET(8 /*4*/),
+/* 1 */  Tkey, Tdup, Tlit, LIT(NEWLINE), Tnotequal, Tqbranch, OFFSET(33 /*5*/),
+         Tdup, Tlit, LIT(BACKSPACE), Tequal, Tqbranch, OFFSET(18 /*3*/),
+         Tdrop, Tlit, LIT(BACKUP), Temit,
+/* add six instructions */
+         Tlit,
+         LIT(0x20), Temit,
+         Tlit,
+         LIT(BACKUP),Temit,
+         Toneminus, Ttor, Tover, Trfrom,
+         Tumax, Tbranch, OFFSET(8 /*4*/), /* never did foo bar batz so it is 8 not 12 */
 /* 3 */  Tdup, Temit, Tover, Tcstore, Toneplus, Tover, Tumin,
-/* 4 */  Tbranch, OFFSET(-32 /*1*/),
+/* 4 */  Tbranch, OFFSET(-38 /*1*/),
 /* 5 */  Tdrop, Tnip, Tswap, Tminus, Texit };
-
-
-
-
-
 
 
 
