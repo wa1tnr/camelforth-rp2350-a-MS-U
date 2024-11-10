@@ -9,7 +9,7 @@ add_executable(camelforth-b
 
 target_compile_definitions(camelforth-b PRIVATE
     # enable this flag only for no_flash compile:
-    NO_FLASH_CMAKE=-1
+    # NO_FLASH_CMAKE=-1
     # NO_FLASH_CMAKE=-1
 )
 
