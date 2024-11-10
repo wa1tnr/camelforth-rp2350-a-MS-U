@@ -16,9 +16,9 @@ target_compile_definitions(camelforth-b PRIVATE
 target_link_libraries(camelforth-b PRIVATE forth pico-LED asmword ws2812 hardware_flash pico_stdlib)
 
 # pico_set_binary_type(camelforth-b copy_to_ram)
-# pico_set_binary_type(camelforth-b copy_to_ram)
+pico_set_binary_type(camelforth-b copy_to_ram)
 # pico_set_binary_type(camelforth-b no_flash)
-pico_set_binary_type(camelforth-b no_flash)
+# pico_set_binary_type(camelforth-b no_flash)
 
 pico_enable_stdio_usb(camelforth-b 1)
 pico_enable_stdio_uart(camelforth-b 1) # was zero
