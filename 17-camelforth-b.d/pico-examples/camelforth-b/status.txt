@@ -1,3 +1,10 @@
+Sun 10 Nov 00:21:23 UTC 2024
+
+  odd behavior - fails over to prior version in flashROM.
+
+  Likely a 'to ram' program that never writes the flash.
+  Unable to test at this late hour.  TODO.
+
 Sat  9 Nov 23:31:51 UTC 2024
 
   provisionally useful program - blinks and accepts commands.
