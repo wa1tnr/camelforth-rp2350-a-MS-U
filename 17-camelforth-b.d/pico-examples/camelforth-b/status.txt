@@ -1,3 +1,27 @@
+Sat 16 Nov 18:11:43 UTC 2024
+
+  Seems very good, commit 8bed31d 17:46z Sat 16 Nov.
+
+  Build on this work.  flipper() and friends (haha) now
+  using the cstack or at least not broken by its presence. ;)
+
+  Intent is to factor the do/while loop and consider some
+  other contstruct that is in no way a 'while' ;)
+
+  That in rp2350_reading.inc or somesuch.  See recent commits.
+
+  CMakeLists.txt for verbose output from the compiler,
+  and or 'make'.  WIP - not finished yet.  Unsure which
+  options obtain and which are ineffective or unrecognized
+  in the context &c &c.
+
+  from git show:
+
+    commit 8bed31d335ee29f363617001a630a684ddb28287
+    Date:   Sat Nov 16 17:46:08 2024 +0000
+
+        commit comment was: DONE: to revert immediately
+
 Sun 10 Nov 00:21:23 UTC 2024
 
   odd behavior - fails over to prior version in flashROM.
