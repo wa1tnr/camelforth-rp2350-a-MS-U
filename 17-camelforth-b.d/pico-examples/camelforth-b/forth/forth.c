@@ -701,6 +701,7 @@ CODE(flwrite) { /* -- */
 }
 
 /* #include "rp2040_reading.inc" */
+#include "cstack.inc"
 #include "rp2350_reading.inc"
 #include "rp2040_flash_ops.inc"
 /*
