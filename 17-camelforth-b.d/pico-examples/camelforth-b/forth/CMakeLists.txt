@@ -1,6 +1,6 @@
-if ( CMAKE_COMPILER_IS_GNUCC )
+# if ( CMAKE_COMPILER_IS_GNUCC )
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Wextra")
-endif()
+# endif()
 
 # target_link_libraries(forth hardware_watchdog pico_stdlib)
 
