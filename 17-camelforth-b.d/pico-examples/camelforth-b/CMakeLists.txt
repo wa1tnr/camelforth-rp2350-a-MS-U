@@ -1,6 +1,8 @@
 # add_compile_options(-DNOT_WOKWI -v -Werror -Wall -Wextra -Wnull-dereference -fmax-errors=8)
 # add_compile_options(-DNOT_WOKWI -v -Wall -Wextra -Wnull-dereference -fmax-errors=8)
-add_compile_options(-DNOT_WOKWI    -Wall -Wextra -Wnull-dereference -fmax-errors=8)
+# commented 15 Nov 2024 add_compile_options(-DNOT_WOKWI    -Wall -Wextra -Wnull-dereference -fmax-errors=8)
+
+# immediate candidate for restore 15 Nov 20:14z # add_compile_options(-DNOT_WOKWI -Wall -Wextra -Wnull-dereference -fmax-errors=3)
 add_executable(camelforth-b
         camelforth-b.c
         )
@@ -13,6 +15,7 @@ target_compile_definitions(camelforth-b PRIVATE
     # NO_FLASH_CMAKE=-1
 )
 
+# 15 Nov 2024
 target_link_libraries(camelforth-b PRIVATE forth pico-LED asmword ws2812 hardware_flash pico_stdlib)
 
 # pico_set_binary_type(camelforth-b copy_to_ram)
@@ -27,8 +30,11 @@ pico_add_extra_outputs(camelforth-b)
 
 example_auto_set_url(camelforth-b)
 
-if ( CMAKE_COMPILER_IS_GNUCC )
-    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
+    # add_compile_options(-Wno-maybe-uninitialized -DNOT_WOKWI -v -Wall -Wextra -Wnull-dereference -fmax-errors=4)
+    add_compile_options(-Wno-maybe-uninitialized -DNOT_WOKWI -Wall -Wextra -Wnull-dereference -fmax-errors=4)
+    # add_compile_options(-Wno-maybe-uninitialized)
+    # -Werror
 endif()
 
 add_subdirectory(forth)
