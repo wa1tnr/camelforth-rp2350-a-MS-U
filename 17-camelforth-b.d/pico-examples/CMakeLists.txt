@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
 
-# Pull in PICO SDK (must be before project)
 include(pico_sdk_import.cmake)
 include(pico_extras_import_optional.cmake)
 
@@ -11,19 +10,22 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
+if (PICO_SDK_VERSION_STRING VERSION_LESS "2.0.0")
+    message(FATAL_ERROR "Raspberry Pi Pico SDK version 2.0.0 (or later) required. Your version is ${PICO_SDK_VERSION_STRING}")
+endif()
 
 set(PICO_EXAMPLES_PATH ${PROJECT_SOURCE_DIR})
 
-# Initialize the SDK
-pico_sdk_init()
-
-include(example_auto_set_url.cmake)
-
-if ( CMAKE_COMPILER_IS_GNUCC )
-    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+if (NOT DEFINED PICO_STDIO_USB_CONNECT_WAIT_TIMEOUT_MS)
+    set(PICO_STDIO_USB_CONNECT_WAIT_TIMEOUT_MS 3000)
 endif()
 
-# Hardware-specific examples in subdirectories:
-# add_subdirectory(cmake)
+pico_sdk_init()
+include(example_auto_set_url.cmake)
+
+add_compile_options(-Wall
+        -Wno-format
+        -Wno-unused-function
+        )
+
 add_subdirectory(camelforth-b)
-# add_subdirectory(system)
