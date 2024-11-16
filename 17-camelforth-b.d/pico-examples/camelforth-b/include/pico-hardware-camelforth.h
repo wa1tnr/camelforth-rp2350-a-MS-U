@@ -1,5 +1,5 @@
-#ifndef _PICO_HARDWARE_INCLUDES_LOCAL_CF
-#define _PICO_HARDWARE_INCLUDES_LOCAL_CF
+#ifndef _PICO_HARDWARE_INCLUDES_LOCAL_CF_
+#define _PICO_HARDWARE_INCLUDES_LOCAL_CF_
 #warning grafted back: pico-hardware-camelforth.h  Sat  9 Nov 19:27:45 UTC 2024
 // establish an ident string to print to console
 // establish flash limits
