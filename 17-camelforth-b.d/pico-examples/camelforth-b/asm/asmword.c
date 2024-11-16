@@ -43,7 +43,7 @@ void asmword(void) {
 #endif
     static volatile int c; // not volatile static as it was, prior
     c = (PBLINKS * 2) + 2;
-    unsigned int ram = &c;
+    unsigned int ram = (unsigned int) &c; // type cast 15 Nov 2024
     return experiment_a_asm(c, ram);
 }
 
