@@ -4,8 +4,11 @@
 sometarget:
 	@ echo no active target
 
-picocom:
+picocoma:
 	@./cf-fastpico9t /dev/ttyACM0
+
+picocom:
+	@./cf-fastpico9t /dev/ttyACM1
 
 notes:
 	@echo 'wrt the reading word:'
