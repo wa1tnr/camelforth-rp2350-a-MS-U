@@ -26,7 +26,7 @@ int flipper(int flip) {
 
     if (flip == -1) {
         sleep_ms(1);
-        gpio_put(LED_PIN, 0);
+        gpio_put(LED_PIN, 0); // ON!
     }
 
     int flop = flip;
@@ -41,41 +41,25 @@ int flipper(int flip) {
     return flip;
 }
 
-#warning cool thing happening rp2350_reading.inc  LINE 44
-
-/* blipLED() appears to mostly work if not entirely. */
-
-/*
- the count increases by one for each ascii-xfer char seen,
-   though it is unclear why there is an apparent one to one
-   relationship there.
- */
-
 void blipLED() {
-    char buffer[32];
-    int count = cpop();
+    /* char buffer[32]; */
+    int counted = cpop();
     int flip = cpop();
-    count++;
+    counted++;
 
-#if 0
-    snprintf(buffer, sizeof(buffer), "\nsaid 36: count: %d\n", count);
-    printf(buffer);
-#endif
-
-    /* fix indent here: */
-
-    if (count == 0x3F) {
-        count = 0;
+    if (counted == 0x3F) {
+        counted = 0;
         flip = flipper(flip);
     }
 
     cpush(flip);
-    cpush(count);
+    cpush(counted);
 }
 
 CODE(reading) {
+    /* const uint LED_PIN = 25; */
     int bufpos = 0;
-    int count = 0;
+    int counted = 0;
     int flip = -1;
     uint8_t ch_read, ch_test;
     uint32_t location = (uint32_t)&buffer[0];
@@ -84,9 +68,9 @@ CODE(reading) {
     for (int i = (READING_SIZE - 1); i > 0; i--) {
         do {
             cpush(flip);
-            cpush(count);
+            cpush(counted);
             blipLED();
-            count = cpop();
+            counted = cpop();
             flip = cpop();
             ch_read = getchar_timeout_us(18);
         } while ((ch_read == '\0') || (ch_read == 0xff) || (ch_read == 0xfe));
@@ -97,8 +81,15 @@ CODE(reading) {
              (ch_test == '\n'))) {
             if (ch_read == '\033') {
                 buffer[bufpos++] = '\0';
-                noFlip = true; // bypass flag
+                /* noFlip = true; */  /* return shortens path */ // bypass flag
                 printf(" ESC! ");
+                putch('B');
+                putch('a');
+                putch('k');
+                putch('e');
+                putch('d');
+                putch('.');
+                _pico_LED();
                 return;
             }
             buffer[bufpos++] = ch_read;
