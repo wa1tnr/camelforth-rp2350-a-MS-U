@@ -9,7 +9,7 @@
 
 #ifdef NOT_WOKWI
 #define HAVE_FOUND_NON_WOKWI_ENVIRONMENT
-#warning this is not wokwi
+// #warning this is not wokwi
 #endif
 
 #define PBLINKS 17 // how many blinks?
@@ -38,7 +38,7 @@ void setup(void) {
 #endif
 
 #ifdef HAVE_FOUND_NON_WOKWI_ENVIRONMENT
-#warning this is  not wokwi asmword function header
+// #warning this is  not wokwi asmword function header
 void asmword(void) {
 #endif
     static volatile int c; // not volatile static as it was, prior

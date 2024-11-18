@@ -46,9 +46,9 @@
 #endif
 
 #ifdef HAVE_FOUND_NON_WOKWI_ASM_ENVIRONMENT
-#warning led alt pin is 25 non wokwi - expecting pico-sdk
-#warning should not see this in pio build log - should see in pico-sdk cli build
-#warning have seen this in the pico-sdk 5 April 2023 21:21 UTC
+// #warning led alt pin is 25 non wokwi - expecting pico-sdk
+// #warning should not see this in pio build log - should see in pico-sdk cli build
+// #warning have seen this in the pico-sdk 5 April 2023 21:21 UTC
 .equ LED_ALT_PIN         , 25 @ 9
 #endif
 
