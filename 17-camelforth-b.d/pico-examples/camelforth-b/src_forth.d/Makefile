@@ -7,8 +7,10 @@ sometarget:
 picocoma:
 	@./cf-fastpico9t /dev/ttyACM0
 
-picocom:
+picocomb:
 	@./cf-fastpico9t /dev/ttyACM1
+
+picocom:	picocoma
 
 notes:
 	@echo 'wrt the reading word:'
