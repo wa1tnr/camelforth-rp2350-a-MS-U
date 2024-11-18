@@ -29,7 +29,7 @@ const uint8_t *flash_target_contents = (const uint8_t *) (XIP_BASE + FLASH_TARGE
 
 CODE(erase) { // ( offset -- address bool ) // address only valid if bool returned as true
     bool debug = -0;
-    stdio_init_all();
+    /* EXPERIMENT: omit init Mon 18 15z AA */ // stdio_init_all();
     if (debug) printf("\nErasing target sector...\n");
 
     if (debug) printf("\nv.000\n");
@@ -84,7 +84,7 @@ void print_buf(const uint8_t *buf, size_t len) {
 
 
 void flash_write_buffer(void) {
-    stdio_init_all();
+    /* EXPERIMENT: omit init Mon 18 15z BB */ // stdio_init_all();
     flash_range_erase(FLASH_TARGET_OFFSET, FLASH_SECTOR_SIZE);
 
     uint8_t program_data[FLASH_PAGE_SIZE];
@@ -122,7 +122,7 @@ void flash_write_buffer(void) {
 }
 
 void flash_write_test(void) {
-    stdio_init_all();
+    /* EXPERIMENT: omit init Mon 18 15z CC */ // stdio_init_all();
     uint8_t random_data[FLASH_PAGE_SIZE];
     for (unsigned int i = 0; i < FLASH_PAGE_SIZE; ++i)
         random_data[i] = rand() >> 16;
