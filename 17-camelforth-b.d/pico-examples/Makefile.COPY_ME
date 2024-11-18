@@ -1,0 +1,79 @@
+# Sun 17 Nov 22:13:43 UTC 2024
+
+# FOR HINTS please see this critically important file:
+#   camelforth-rp2350-a-MS-U/17-camelforth-b.d/pico-examples/build_pico2/CMakeFiles/Makefile2
+
+# experiment TODO:  call out the shell explicitly
+
+# SHELL = /bin/sh
+
+# generated uses this for cmake command:
+# CMAKE_COMMAND = /home/chris/.pico-sdk/cmake/v3.28.6/bin/cmake
+
+
+# - - - locally specified stuff - - -
+
+SHRED=--prev_built--2297-aa
+
+all:	make_j4 ending
+
+git_status:
+	@git status | cat | tr -d '\t'
+
+pwd:
+	@echo -n '  ..'
+	@pwd | cut -b 27-
+
+# pid_standin := $(shell date +%Y-%m-%d_%H-%M-%S)
+#
+# file: 
+#    echo $(pid_standin)
+
+pid_standin := $(shell date +%d.%H.%M.%S)
+pid_standin_short := $(shell date +%d.%H)
+
+dir_setups:	.begin
+	@mv ./build_pico2 ./build_pico2-${SHRED}-${pid_standin}-
+	@mkdir ./build_pico2 ; date > ./build_pico2/.semaphore-${pid_standin}-
+	@sha1sum ./build_pico2/.semaphore-${pid_standin}-
+	@ls -1 ./build_pico2-${SHRED}-${pid_standin_short}*
+
+# a semicolon separated command line (ignoring success/fail)
+# keeps the same cd (change directory) context intact,
+# left to right, as it would at real CLI (bash shell).
+
+cmaking:	dir_setups
+	@cd ./build_pico2 ; cmake ../ -DPICO_BOARD=pico2 \
+	-DCMAKE_BUILD_TYPE=Debug ; date > carson.loud.mi.ti
+
+make_j4:	cmaking
+	@cd ./build_pico2/camelforth-b ; make -j4
+
+just_the_cma:
+	@cmake ../ -DPICO_BOARD=pico2 -DCMAKE_BUILD_TYPE=Debug
+
+ending:	.end
+
+# ---- messages ----
+
+esc_char:
+	@echo -n \\033
+
+.end:
+	@echo -e '\033\033[0;1;34m[\033[0;33mend.\033[0m\033[0;1;34m]\033[0m'
+
+.begin:
+	@echo -e '\033[0;1;34m[\033[0;33mbegin..\033[0m\033[0;1;34m]\033[0m'
+
+.compile_non_verbose:
+	@echo -e '\033[0;1;34m[\033[0;33mcompile non-verbose\033[0m\033[0;1;34m]\033[0m'
+
+.clean:
+	@echo -e '\033[0;1;34m[\033[0;33mclean\033[0m\033[0;1;34m]\033[0m'
+
+.distclean:
+	@echo -e '\033[0;1;34m[\033[0;33mdistclean\033[0m\033[0;1;34m]\033[0m'
+	@> .semaphore-distclean
+
+# end.
+
