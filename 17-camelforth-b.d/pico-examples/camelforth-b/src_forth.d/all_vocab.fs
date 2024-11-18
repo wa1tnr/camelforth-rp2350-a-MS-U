@@ -1,13 +1,16 @@
-( all_vocab.fs Saturday 16 November 1726z or later )
+( all_vocab.fs Monday 18 November 0137z or later )
 HEX
 : dump DUMP ; : here HERE ; : words WORDS ; 
 : cold COLD ; : .s .S ; : hex HEX ; 
 : decimal DECIMAL ; : cr CR ; : swap SWAP ;
 : drop DROP ; : dup DUP ; : over OVER ;
 : space SPACE ; : spaces SPACES ; : emit EMIT ;
-: vers S" Sat 16 Nov 17:59:23 UTC 2024 palstone truffle compote " TYPE ;
+: vers S" recent stamp: " TYPE
+       S" Mon 18 Nov 01:38:09 UTC 2024  " TYPE
+       S" commit 80a4cd8  tamarind gaspacho" TYPE ;
 : p 18 dump dup cr . ; ( maximum dump single screenful )
 : q 3000 + p ; ( jump way ahead )
+: showtib cr cr TIB TIBSIZE TYPE cr ;
 : tryloop ( hi lo -- ) ( ex. 4 0 tryloop )
   DO blink LOOP ;
 : delay ( n -- ) ( tenths of a second )
