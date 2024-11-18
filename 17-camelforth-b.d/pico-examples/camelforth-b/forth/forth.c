@@ -13,7 +13,14 @@
 // #define MODE_STAMP "no_flash   "
 // #define MODE_STAMP "no_flash   "
 #define VERS_CFORTH ("\103CamelForth in C v0.1 - 14 Feb 2016 - " COMMIT_TIME_STAMP "  ");
-#define DOFILLS_datus ("\n   " FEATURE_STAMP "  " CF_PICO_PLATFORM "\n   branch " BRANCH_STAMP " " COMMIT_STAMP "\n   " MODE_STAMP " mode                  "  RECENT_STAMP "\n\n");
+#define DOFILLS_datus ("\n   " FEATURE_STAMP "  " CF_PICO_PLATFORM "\n   branch " BRANCH_STAMP " " COMMIT_STAMP "\n   " MODE_STAMP " mode                  "  RECENT_STAMP "\n                        buildStamp: " __DATE__ " " __TIME__ " UTC 2024\n\n");
+
+/* wasted
+   branch dvlp-aa   arroyo   r.00a- -Wall    0.2.0-pre-alpha d766f4f
+   copy_to_ram mode                  Mon 18 Nov 22:23:40 UTC 2024
+                       buildStamp: Nov 18 2024  22:33:10 UTC 2024
+
+*/
 
 /****h* camelforth/forth.c
  * NAME
