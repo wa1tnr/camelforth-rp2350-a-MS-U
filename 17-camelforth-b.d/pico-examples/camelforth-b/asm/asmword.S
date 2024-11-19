@@ -10,7 +10,8 @@
 @ - - - - -   architecture flags   - - - - -
 
 .syntax unified
-.cpu    cortex-m0plus
+@ .cpu    cortex-m0plus
+.cpu    cortex-m33
 .thumb
 
 .global experiment_a_asm
