@@ -13,9 +13,11 @@
 
 # - - - locally specified stuff - - -
 
-SHRED=--prev_built--2297-aa
+SHRED=--prev_built--2297-bb
 
-all:	make_j4 ending
+all:	make_j4_verbs ending
+
+allnvb:	make_j4 ending
 
 git_status:
 	@git status | cat | tr -d '\t'
@@ -45,6 +47,9 @@ dir_setups:	.begin
 cmaking:	dir_setups
 	@cd ./build_pico2 ; cmake ../ -DPICO_BOARD=pico2 \
 	-DCMAKE_BUILD_TYPE=Debug ; date > carson.loud.mi.ti
+
+make_j4_verbs:	cmaking
+	@cd ./build_pico2/camelforth-b ; make -j4 VERBOSE=1
 
 make_j4:	cmaking
 	@cd ./build_pico2/camelforth-b ; make -j4
