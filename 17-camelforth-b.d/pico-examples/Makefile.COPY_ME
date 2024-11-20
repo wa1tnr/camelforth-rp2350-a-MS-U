@@ -17,7 +17,7 @@ SHRED=--prev_built--2297-bb
 
 all:	allnvb
 
-allwv:	make_j4_verbs ending
+allvb:	make_j4_verbs ending
 
 allnvb:	make_j4 ending
 
