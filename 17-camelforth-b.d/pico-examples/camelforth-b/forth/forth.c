@@ -13,14 +13,7 @@
 // #define MODE_STAMP "no_flash   "
 // #define MODE_STAMP "no_flash   "
 #define VERS_CFORTH ("\103CamelForth in C v0.1 - 14 Feb 2016 - " COMMIT_TIME_STAMP "  ");
-#define DOFILLS_datus ("\n   " FEATURE_STAMP "  " CF_PICO_PLATFORM "\n   branch " BRANCH_STAMP " " COMMIT_STAMP "\n   " MODE_STAMP " mode                  "  RECENT_STAMP "\n                        buildStamp: " __DATE__ " " __TIME__ " UTC 2024\n\n");
-
-/* wasted
-   branch dvlp-aa   arroyo   r.00a- -Wall    0.2.0-pre-alpha d766f4f
-   copy_to_ram mode                  Mon 18 Nov 22:23:40 UTC 2024
-                       buildStamp: Nov 18 2024  22:33:10 UTC 2024
-
-*/
+#define DOFILLS_datus ("\n   " FEATURE_STAMP "  " CF_PICO_PLATFORM "\n   branch " BRANCH_STAMP " " COMMIT_STAMP "\n   " MODE_STAMP " mode                     "  RECENT_STAMP "\n                           buildStamp: " __DATE__ " " __TIME__ " UTC 2024\n");
 
 /****h* camelforth/forth.c
  * NAME
@@ -709,7 +702,19 @@ CODE(flwrite) { /* -- */
 
 /* #include "rp2040_reading.inc" */
 #include "cstack.inc"
+
+
+#if defined(__riscv)
+/* nothing here */
+#warning riscv has a relevant symbol defined somewhere
+#elif PICO_RP2040
+/* nothing here */
+#warning rp2040 has a relevant symbol defined somewhere
+#else
+#warning rp2350  in arm mode has a relevant symbol defined somewhere
 #include "rp2350_reading.inc"
+#endif
+
 #include "rp2040_flash_ops.inc"
 /*
   1 // rp2040_reading.inc
