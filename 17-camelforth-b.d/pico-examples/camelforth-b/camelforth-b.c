@@ -9,16 +9,17 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#include <stdio.h>
-#include "pico/stdio.h"
-#include <stdlib.h>
-#include "pico/stdlib.h"
 #include "hardware/flash.h"
+#include "pico/stdio.h"
+#include "pico/stdlib.h"
 #include "tusb.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 #define FLASH_TARGET_OFFSET_B 0x1E0000
 
-const uint8_t *flash_target_contents_b = (const uint8_t *) (XIP_BASE + FLASH_TARGET_OFFSET_B);
+const uint8_t *flash_target_contents_b =
+    (const uint8_t *)(XIP_BASE + FLASH_TARGET_OFFSET_B);
 
 #define UART_ID uart0
 #define BAUD_RATE 115200
@@ -34,11 +35,13 @@ extern void _pico_pip(void);
 extern void _pico_LED(void);
 
 void _loop_delay_local(void) {
-    if (tud_cdc_n_connected (0)) return;
-    for (volatile int i=288;i>0;i--) {
-        for (volatile int j=455555;j>0;j--) {
+    if (tud_cdc_n_connected(0))
+        return;
+    for (volatile int i = 288; i > 0; i--) {
+        for (volatile int j = 455555; j > 0; j--) {
         }
-        if (tud_cdc_n_connected (0)) return;
+        if (tud_cdc_n_connected(0))
+            return;
     }
 }
 
@@ -56,13 +59,15 @@ int main(void) {
     sleep_ms(600);
     _pico_LED_init();
     sleep_ms(140);
-    for (int i=3;i>0;i--) _pico_LED();
-    while (! tud_cdc_n_connected (0)) {
+    for (int i = 3; i > 0; i--)
+        _pico_LED();
+    while (!tud_cdc_n_connected(0)) {
         blink_loop();
     }
-    for (int i=3;i>0;i--) _pico_LED();
+    for (int i = 3; i > 0; i--)
+        _pico_LED();
     uart_puts(UART_ID, "\n   camelforth-rp2350-a-MS-U r0.2.0-pre-alpha\n");
-    printf(              "\n   camelforth-rp2350-a-MS-U r0.2.0-pre-alpha\n");
+    printf(            "\n   camelforth-rp2350-a-MS-U r0.2.0-pre-alpha\n");
 
     uart_puts(UART_ID, "        +fl_sizing +alltargets +itsybitsy +blinkwait +feather\n");
     printf(            "        +fl_sizing +alltargets +itsybitsy +blinkwait +feather\n");
@@ -71,16 +76,17 @@ int main(void) {
     printf(            "        +no_emit +auto_load +rewind +flaccept +erase +flwrite\n");
 
     uart_puts(UART_ID, "        +rp2350 +reflash +dump +blink +UART +USB\n");
-    printf(            "        +bcde +rp2350 +reflash +dump +blink     \n");
+    printf(            "        +tidy +bcde +rp2350 +reflash +dump +blink +UART +USB \n");
 
     crufty_printer();
 
     _this_ws2812();
 
-    printf( "      NEOPIX activity here\n");
-    printf( "\n");
+    printf("      NEOPIX activity here\n");
+    printf("\n");
 
-// kludge: bug with flash access in no_flash binary compile (see CMakeLists.txt for the toggle)
+// kludge: bug with flash access in no_flash binary compile (see CMakeLists.txt
+// for the toggle)
 // #undef NO_FLASH_CMAKE
 #ifdef NO_FLASH_CMAKE
     flash_range_erase(FLASH_TARGET_OFFSET_B, FLASH_SECTOR_SIZE);
