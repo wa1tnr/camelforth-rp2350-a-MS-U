@@ -1,4 +1,5 @@
-// Wed Apr 14 20:45:28 UTC 2021
+// Thu Nov 21 19:54:31 UTC 2024
+// was: Wed Apr 14 20:45:28 UTC 2021
 // wa1tnr
 // camelforth
 
@@ -9,21 +10,15 @@
  */
 
 #include <stdio.h>
-#include "pico/stdio.h"     // rp2040_flash_ops.inc
-#include <stdlib.h>         // rp2040_flash_ops.inc
+#include "pico/stdio.h"
+#include <stdlib.h>
 #include "pico/stdlib.h"
-#include "hardware/flash.h" // rp2040_flash_ops.inc
+#include "hardware/flash.h"
 #include "tusb.h"
-// #include "cdc_device.h" // mystery location
 
-// #define FLASH_TARGET_OFFSET_B (256 * 1024)
 #define FLASH_TARGET_OFFSET_B 0x1E0000
 
-// super kludge to do this here this way 27 Feb 2021:
 const uint8_t *flash_target_contents_b = (const uint8_t *) (XIP_BASE + FLASH_TARGET_OFFSET_B);
-
-
-/// \tag::hello_uart[]
 
 #define UART_ID uart0
 #define BAUD_RATE 115200
@@ -40,7 +35,7 @@ extern void _pico_LED(void);
 
 void _loop_delay_local(void) {
     if (tud_cdc_n_connected (0)) return;
-    for (volatile int i=288;i>0;i--) { // 144 okay
+    for (volatile int i=288;i>0;i--) {
         for (volatile int j=455555;j>0;j--) {
         }
         if (tud_cdc_n_connected (0)) return;
@@ -53,44 +48,37 @@ void blink_loop(void) {
 }
 
 int main(void) {
-    sleep_ms(1800);
+    sleep_ms(1100);
     uart_init(UART_ID, BAUD_RATE);
-
     gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
     gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART);
-
     stdio_init_all();
-
-    // uart_putc_raw(UART_ID, 'A');
-
-    sleep_ms(800);
-    // if bool     tud_cdc_n_connected       (uint8_t itf);
+    sleep_ms(600);
     _pico_LED_init();
+    sleep_ms(140);
+    for (int i=3;i>0;i--) _pico_LED();
     while (! tud_cdc_n_connected (0)) {
-        blink_loop(); // no while - done only once
+        blink_loop();
     }
     for (int i=3;i>0;i--) _pico_LED();
-    // stale message text follows - poorly maintained.
-    // poor testing of latest edits - may cause issues.  However, brief test seemed okay.
-    uart_puts(UART_ID, "\r\n   camelforth-rp2350-a-MS-U r0.2.0-pre-alpha\r\n\r\n");
-    printf(              "\n   camelforth-rp2350-a-MS-U r0.2.0-pre-alpha\n\n");
+    uart_puts(UART_ID, "\n   camelforth-rp2350-a-MS-U r0.2.0-pre-alpha\n");
+    printf(              "\n   camelforth-rp2350-a-MS-U r0.2.0-pre-alpha\n");
 
-    uart_puts(UART_ID, "        +fl_sizing +alltargets +itsybitsy +blinkwait +feather\r\n");
-    printf(            "        +fl_sizing +alltargets +itsybitsy +blinkwait +feather\n\n\n");
+    uart_puts(UART_ID, "        +fl_sizing +alltargets +itsybitsy +blinkwait +feather\n");
+    printf(            "        +fl_sizing +alltargets +itsybitsy +blinkwait +feather\n");
 
-    printf(            "        Darmok and Gilad at Tenagra  Sun 10 Nov 19:37:53 UTC 2024\n\n\n");
-
-    uart_puts(UART_ID, "        +no_emit +auto_load +rewind +flaccept +erase +flwrite\r\n");
+    uart_puts(UART_ID, "        +no_emit +auto_load +rewind +flaccept +erase +flwrite\n");
     printf(            "        +no_emit +auto_load +rewind +flaccept +erase +flwrite\n");
 
-    uart_puts(UART_ID, "        +rp2350 +reflash +dump +blink +UART +USB\r\n");
-    printf(            "        +rp2350 +reflash +dump +blink +UART +USB\n");
+    uart_puts(UART_ID, "        +rp2350 +reflash +dump +blink +UART +USB\n");
+    printf(            "        +bcde +rp2350 +reflash +dump +blink     \n");
 
-    crufty_printer(); // examine ram with this nonsense function
+    crufty_printer();
 
-    _this_ws2812(); // do a NEOPIX thing here
+    _this_ws2812();
 
-    printf( "   NEOPIX activity here\n\n");
+    printf( "      NEOPIX activity here\n");
+    printf( "\n");
 
 // kludge: bug with flash access in no_flash binary compile (see CMakeLists.txt for the toggle)
 // #undef NO_FLASH_CMAKE
@@ -105,16 +93,9 @@ int main(void) {
     flash_range_erase(FLASH_TARGET_OFFSET_B, FLASH_SECTOR_SIZE);
     printf("   flash_range_erase is required (and completed).\n\n");
 #endif // #ifdef WANT_FORCED_ERASE_QTPY
-
-    // unsigned int start_address = (uint32_t) XIP_BASE + (uint32_t) FLASH_TARGET_OFFSET_B ;
-    // printf("%s", "\n\n       start_address: ");
-    // printf("%8X", start_address);
-
-    // printf("%s", "\n");
-
     while(1) {
         interpreter(); // camelforth
     }
 }
-// END.
 
+// END.
