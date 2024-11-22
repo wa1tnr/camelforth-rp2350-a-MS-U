@@ -28,11 +28,13 @@ pid_standin := $(shell date +%d.%H.%M.%S)
 pid_standin_short := $(shell date +%d.%H)
 
 dir_setups:	.begin
-	@if [ -d "./build_pico2" ]; then mv ./build_pico2 ./build_pico2-${SHRED}-${pid_standin}- ; fi
+	@if [ -d "./build_pico2" ]; \
+		then mv ./build_pico2 ./build_pico2-${SHRED}-${pid_standin}- ; \
+		ls -1 ./build_pico2-${SHRED}-${pid_standin_short}* ; \
+	fi
 	@date ; echo -n 'sleeping 1 second..' ; sleep 1; echo '.  Done.' ; sleep 1
 	@mkdir ./build_pico2 ; date > ./build_pico2/.semaphore-${pid_standin}-
 	@sha1sum ./build_pico2/.semaphore-${pid_standin}-
-	@ls -1 ./build_pico2-${SHRED}-${pid_standin_short}*
 
 cmaking:	dir_setups
 	@cd ./build_pico2 ; cmake ../ -DPICO_BOARD=pico2 \
