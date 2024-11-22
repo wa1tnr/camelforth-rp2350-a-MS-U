@@ -1,15 +1,11 @@
-# Sun 17 Nov 22:13:43 UTC 2024
+# Fri 22 Nov 16:31:33 UTC 2024
+# was: Fri 22 Nov 15:20:11 UTC 2024
+# was: Sun 17 Nov 22:13:43 UTC 2024
+
+SHELL = /bin/sh
 
 # FOR HINTS please see this critically important file:
 #   camelforth-rp2350-a-MS-U/17-camelforth-b.d/pico-examples/build_pico2/CMakeFiles/Makefile2
-
-# experiment TODO:  call out the shell explicitly
-
-# SHELL = /bin/sh
-
-# generated uses this for cmake command:
-# CMAKE_COMMAND = /home/chris/.pico-sdk/cmake/v3.28.6/bin/cmake
-
 
 # - - - locally specified stuff - - -
 
@@ -28,23 +24,15 @@ pwd:
 	@echo -n '  ..'
 	@pwd | cut -b 27-
 
-# pid_standin := $(shell date +%Y-%m-%d_%H-%M-%S)
-#
-# file: 
-#    echo $(pid_standin)
-
 pid_standin := $(shell date +%d.%H.%M.%S)
 pid_standin_short := $(shell date +%d.%H)
 
 dir_setups:	.begin
-	@mv ./build_pico2 ./build_pico2-${SHRED}-${pid_standin}-
+	@if [ -d "./build_pico2" ]; then mv ./build_pico2 ./build_pico2-${SHRED}-${pid_standin}- ; fi
+	@date ; echo -n 'sleeping 1 second..' ; sleep 1; echo '.  Done.' ; sleep 1
 	@mkdir ./build_pico2 ; date > ./build_pico2/.semaphore-${pid_standin}-
 	@sha1sum ./build_pico2/.semaphore-${pid_standin}-
 	@ls -1 ./build_pico2-${SHRED}-${pid_standin_short}*
-
-# a semicolon separated command line (ignoring success/fail)
-# keeps the same cd (change directory) context intact,
-# left to right, as it would at real CLI (bash shell).
 
 cmaking:	dir_setups
 	@cd ./build_pico2 ; cmake ../ -DPICO_BOARD=pico2 \
@@ -59,7 +47,26 @@ make_j4:	cmaking
 just_the_cma:
 	@cmake ../ -DPICO_BOARD=pico2 -DCMAKE_BUILD_TYPE=Debug
 
+dirs_to_mv = $(wildcard ./build_pico2---prev_buil*)
+
+# echo; echo " \044 pwd \c" ; pwd ; echo   # the \c says print no more output.
+
+_cleaner:
+	@echo these previous build directories are to be moved to the trash directory:
+	@date; echo -n '  sleeping for 1 second..' ; sleep 1; echo '.  Done.' ; sleep 1
+	@echo $(dirs_to_mv)
+	@cd ./nbuild--rescind/trash.d ; \
+		for indexed in $(dirs_to_mv) ; \
+		do mv ../../$$indexed  . ; \
+		echo; echo " \044 pwd" ; pwd ; echo ; \
+		echo " \044 lsd" ; lsd ; \
+		date ; sleep 1; done
+	@echo cleaned.
+
+clean:	.clean _cleaner ending
+
 ending:	.end
+
 
 # ---- messages ----
 
